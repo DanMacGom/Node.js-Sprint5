@@ -23,3 +23,6 @@ GET /chatrooms/:chatroomId : _renders chat.html corresponding to its chatroomId_
 DELETE /chatrooms/:chatroomId : _deletes chatroom with corresponding id_
 
 GET /chatrooms/:chatroomId/chat : _renders chat.ejs corresponding to its id_
+
+# Environment variables:
+Check .env_example to know which variables are needed for the app to work, then copy it in a file named .env and fill them up.

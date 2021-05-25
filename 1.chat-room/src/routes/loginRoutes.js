@@ -27,7 +27,4 @@ loginRouter.post(
     loginController.getCookie
 );
 
-// Logout
-// loginRouter.get("/logout", loginController.logout);
-
 module.exports = loginRouter;

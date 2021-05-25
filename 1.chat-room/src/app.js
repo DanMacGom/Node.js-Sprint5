@@ -9,7 +9,6 @@ dotenv.config({ path: path.resolve("../../.env") });
 const usersRouter = require("./routes/usersRoutes");
 const chatroomsRouter = require("./routes/chatroomsRoutes");
 const loginRouter = require("./routes/loginRoutes");
-// const googleAuth = require("./auth/googleAuth");
 
 const app = express();
 
