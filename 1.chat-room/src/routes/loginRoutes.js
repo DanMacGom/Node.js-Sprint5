@@ -5,24 +5,13 @@ const usersController = require("../controllers/usersController");
 
 const loginRouter = require("express").Router();
 
-// Signup.
-// loginRouter.get(
-//     "/", 
-//     (req, res) => res.status(200).sendFile(path.resolve(__dirname, "../views/index.html"))
-// );
-// loginRouter.post(
-//     "/", 
-//     usersController.createUserMiddleware, 
-//     loginController.getToken
-// );
-
 // Login.
 loginRouter.get(
-    "/login", 
+    "/", 
     (req, res) => res.render("loginGoogle")
 );
 loginRouter.post(
-    "/login",
+    "/",
     usersController.validateUserMiddleware, 
     loginController.getToken
 );

@@ -1,3 +1,7 @@
+# Branches
+Check main branch for solution to Nivell1.<br>
+Check google-auth for solution to Nivell2.
+
 # Routes
 ## Sign up
 GET / :  _renders index.html_<br>
