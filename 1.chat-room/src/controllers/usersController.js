@@ -1,7 +1,7 @@
 const User = require("../models/usersModel");
 
 // Sign up.
-function createUser(req, res, next) {
+function createUserMiddleware(req, res, next) {
     if (!req.body.username || !req.body.password) {
         res.status(400).send({
             message: "Specify a username and a password."
@@ -19,7 +19,6 @@ function createUser(req, res, next) {
                         message: "There was an error with your query."
                     });
                 } else {
-                    console.log(`User ${data.username} created.`)
                     req.data = { username: data.username };
                     next();
                 }
@@ -28,29 +27,34 @@ function createUser(req, res, next) {
     }
 }
 
-function deleteUser(req, res) {
-    if (!req.body.username) {
-        res.status(400).send({
-            message: " Specify a username."
-        })
-    } else {
+// Delete.
+async function deleteUser(req, res) {
+    const checkUser = await User.findOne(
+        { _id: req.params.userId }
+    ).exec();
+
+    if (checkUser) {
         User.deleteOne(
-            { username: req.body.username },
+            { _id: req.params.userId },
             (err, data) => {
                 if (err) {
                     res.status(500).send({
                         message: "There was a problem with your query."
                     });
                 } else {
-                    res.status(200).send(data)
+                    res.status(200).send(data);
                 }
             }
-        )
+        );
+    } else {
+        res.status(404).send({
+            message: `User ${req.params.userId} does not exist.`
+        });
     }
 }
 
 // Login.
-function validateUser(req, res, next) {
+function validateUserMiddleware(req, res, next) {
     if (!req.body.username || !req.body.password) {
         res.status(400).send({
             message: "Specify a username and a password."
@@ -77,7 +81,8 @@ function validateUser(req, res, next) {
     }
 }
 
-function getAllUsers(req, res, next) {
+// Read.
+function getAllUsers(req, res) {
     User.find(
         {}, { username: 1, creationDate: 1, lastLogin: 1 },
         (err, data) => {
@@ -91,13 +96,11 @@ function getAllUsers(req, res, next) {
             }
         }
     );
-
-    next();
 }
 
 module.exports = {
-    createUser,
+    createUserMiddleware,
     deleteUser,
-    validateUser,
+    validateUserMiddleware,
     getAllUsers
 }

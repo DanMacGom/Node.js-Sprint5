@@ -20,10 +20,8 @@ app.use(cookies());
 app.set("view engine", "ejs");
 app.set('views', path.join(__dirname, '../src/views'))
 app.use(express.static(path.resolve(__dirname, '../public')));
-console.log(path.resolve(__dirname, '../public'));
 
 app.use("/", loginRouter);
-
 app.use("/users", usersRouter);
 app.use("/chatrooms", chatroomsRouter);
 

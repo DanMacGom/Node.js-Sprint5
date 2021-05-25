@@ -1,41 +1,34 @@
-const gal = require('google-auth-library');
-const client = require("../auth/client");
+// const gal = require('google-auth-library');
 
-function checkAuthenticated(req, res, next) {
-    const token = req.cookies["session-token"];
-    let user = {};
+// const client = new gal.OAuth2Client(process.env.GOOGLE_WEB_APP_CLIENT_ID);
 
-    async function verify() {
-        const ticket = await client.verifyIdToken({
-            idToken: token,
-            audience: process.env.GOOGLE_WEB_APP_CLIENT_ID,
-        });
+// function checkAuthenticated(req, res, next) {
+//     const token = req.cookies["session-token"];
+//     let user = {};
 
-        const payload = ticket.getPayload();
-        user.name = payload.name;
-        user.email = payload.email;
-        user.picture = payload.picture;
+//     async function verify() {
+//         const ticket = await client.verifyIdToken({
+//             idToken: token,
+//             audience: process.env.GOOGLE_WEB_APP_CLIENT_ID,
+//         });
 
-        try {
-            req.user = user;
-            next();
-        } catch(err) {
-            console.log(err);
-            res.redirect("/login");
-        };
-    }
+//         const payload = ticket.getPayload();
+//         user.name = payload.name;
+//         user.email = payload.email;
+//         user.picture = payload.picture;
 
-    verify();
-    // .then(() => {
-    //     req.user = user;
-    //     next();
-    // })
-    // .catch((err) => {
-    //     console.log(err);
-    //     res.redirect("/login");
-    // });
-}
+//         try {
+//             req.user = user;
+//             next();
+//         } catch(err) {
+//             console.log(err);
+//             res.redirect("/login");
+//         };
+//     }
 
-module.exports = {
-    checkAuthenticated
-};
+//     verify();
+// }
+
+// module.exports = {
+//     checkAuthenticated
+// };

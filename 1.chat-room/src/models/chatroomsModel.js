@@ -4,7 +4,6 @@ const muv = require("mongoose-unique-validator");
 
 const chatroomSchema = new mongoose.Schema({
     chatroomName: { type: String, index:true, unique: true },
-    usernames: [],
     messages: [
         {
             username: { type: String },

@@ -5,15 +5,29 @@ const usersController = require("../controllers/usersController");
 
 const loginRouter = require("express").Router();
 
-// Signup
-loginRouter.get("/", (req, res) => res.status(200).sendFile(path.resolve(__dirname, "../views/index.html")));
-loginRouter.post("/", usersController.createUser, loginController.getCookie);
+// Signup.
+loginRouter.get(
+    "/", 
+    (req, res) => res.status(200).sendFile(path.resolve(__dirname, "../views/index.html"))
+);
+loginRouter.post(
+    "/", 
+    usersController.createUserMiddleware, 
+    loginController.getCookie
+);
 
-// Login
-loginRouter.get("/login", (req, res) => res.status(200).sendFile(path.resolve(__dirname, "../views/login.html")));
-loginRouter.post("/login", usersController.validateUser, loginController.getCookie);
+// Login.
+loginRouter.get(
+    "/login", 
+    (req, res) => res.status(200).sendFile(path.resolve(__dirname, "../views/login.html"))
+);
+loginRouter.post(
+    "/login", 
+    usersController.validateUserMiddleware, 
+    loginController.getCookie
+);
 
 // Logout
-loginRouter.get("/logout", loginController.logout);
+// loginRouter.get("/logout", loginController.logout);
 
 module.exports = loginRouter;

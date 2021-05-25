@@ -7,18 +7,16 @@ const server = http.createServer(app);
 const io = require("socket.io")(server);
 const cookie = require("cookie");
 
-const Chatroom = require("./models/chatroomsModel");
+const chatroomController = require("./controllers/chatroomsController");
 
 io.on(
     "connection", async (socket) => {
         const username = cookie.parse(socket.handshake.headers.cookie)["session-cookie"];
         const chatroomId = socket.handshake.headers.referer.split("/").pop().replace("?", "");
 
-        const data = await Chatroom.find(
-            { _id: chatroomId },
-            { messages: 1, _id: 1 }
-        ).exec();
+        const data = await chatroomController.getChatroomData(chatroomId);
 
+        // Show past messages.
         for (const message of data[0].messages) {
             socket.emit("chat message", `${message.username}: ${message.content} (${new Date(message.messageSentDate).toISOString()})`);
         }
@@ -28,41 +26,10 @@ io.on(
         socket.on(
             "chat message", (msg) => {
                 io.to(chatroomId).emit("chat message", `${username}: ${msg}`);
-                
-                Chatroom.updateOne(
-                    { _id: chatroomId },
-                    { 
-                        $push: {
-                            messages: { 
-                                username: username,
-                                content: msg
-                            }
-                        }
-                    },
-                    (err, data) => {
-                        if (err) {
-                            console.log(err);
-                        } else {
-                            console.log(msg);
-                        }
-                    }
-                );
+
+                chatroomController.postMessage(chatroomId, username, msg);
             }
         );
-
-
-
-        // socket.on(
-        //     "connect", () => {
-        //         io.emit("onConnect", `${username} connected.`)
-        //     }
-        // );
-
-        // socket.on(
-        //     "disconnect", () => {
-        //         io.emit("onDisconnect", `${username} disconnected.`)
-        //     }
-        // );
     }
 );
 
