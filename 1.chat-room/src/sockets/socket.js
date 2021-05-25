@@ -1,30 +1,29 @@
-class Socket {
-    constructor(io) {
-        this.io = io;
-    }
+// class Socket {
+//     constructor(io) {
+//         this.io = io;
+//     }
 
-    userConnect() {
-        this.io.on(
-            "connection",
-            (socket) => {
-                console.log(`New socket connection with id: ${socket.id}`);
+//     userConnect(req, res) {
+//         this.io.on(
+//             "connection", (socket) => {
+//                 socket.username = req.cookies.username;
 
-                socket.on(
-                    "chat message",
-                    msg => {
-                        this.io.emit("chat message", msg);
-                    }
-                );
+//                 socket.emit(`Welcome ${socket.username}`);
+                
+//                 socket.on(
+//                     "chat message", (msg) => {
+//                         this.io.emit("chat message", msg);
+//                     }
+//                 );
 
-                socket.on(
-                    "disconnect",
-                    () => {
-                        console.log(`Socket with id: ${socket.id} disconnected`); 
-                    }
-                );
-            }
-        )
-    }
-}
+//                 socket.on(
+//                     "disconnect", () => {
+//                         console.log(`Socket with id: ${socket.id} disconnected`); 
+//                     }
+//                 );
+//             }
+//         );
+//     }
+// }
 
-module.exports = Socket;
+// module.exports = Socket;

@@ -1,0 +1,15 @@
+<h2>Chatrooms</h2>
+
+<main>
+    <ul>
+        <% data.forEach((chatroom) => { %>
+            <li>
+                <form action="<%=`/chatrooms/${chatroom._id}`%>" method="GET">
+                    <button type="submit" class="btn-link">
+                        <%= chatroom.chatroomName %>
+                    </button>
+                </form>
+            </li>
+        <% }); %>
+    </ul>
+</main>

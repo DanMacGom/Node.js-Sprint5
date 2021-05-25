@@ -6,7 +6,10 @@ dotenv.config({ path: path.resolve("../../.env") });
 
 mongoose.connect(
     `mongodb://${process.env.MONGODB_HOST}:${process.env.MONGODB_PORT}/ChatApp`,
-    { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true, useFindAndModify: false },
+    { 
+        useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true, 
+        useFindAndModify: false, autoIndex: true 
+    },
     (err) => {
         if (err) {
             console.log(err);
