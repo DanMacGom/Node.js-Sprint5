@@ -4,27 +4,27 @@ const chatroomsController = require("../controllers/chatroomsController");
 const chatroomsRouter = require("express").Router();
 
 chatroomsRouter.get(
-    "/", 
+    "/",
     chatroomsController.getAllChatroomsMiddleware, 
     (req, res) => res.render("chatrooms", { data: req.data })
 );
 chatroomsRouter.post(
-    "/", 
+    "/",
     chatroomsController.createChatroom
 );
 
 chatroomsRouter.get(
-    "/:chatroomId", 
+    "/:chatroomId",
     chatroomsController.getChatroomMiddleware, 
     (req, res) => res.render("chat", { data: req.data })
 );
 chatroomsRouter.delete(
-    "/:chatroomId", 
+    "/:chatroomId",
     chatroomsController.deleteChatroom
 );
 
 chatroomsRouter.get(
-    "/:chatroomId/chat", 
+    "/:chatroomId/chat",
     chatroomsController.getChatroomMiddleware, 
     (req, res) => res.render("chat", { data: req.data })
 );

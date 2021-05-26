@@ -1,5 +1,5 @@
 const gal = require("google-auth-library");
-const usersController = require("../controllers/usersController");
+const User = require("../models/usersModel");
 
 function renderLogin(req, res) {
     res.render("login");
@@ -17,7 +17,23 @@ function getToken(req, res) {
         });
 
         const payload = ticket.getPayload();
-        const userid = payload['sub'];
+
+        const userCheck = await User.findOne(
+            { googleId: payload["sub"] }
+        ).exec()
+
+        if (!userCheck) {
+            User.create(
+                { googleId: payload["sub"], name: payload["name"] }, 
+                (err, data) => {
+                    if (err) {
+                        res.status(500).send({
+                            message: "Something went wrong."
+                        });
+                    } 
+                }
+            );
+        }
     }
 
     verify()

@@ -12,7 +12,6 @@ loginRouter.get(
 );
 loginRouter.post(
     "/",
-    usersController.validateUserMiddleware, 
     loginController.getToken
 );
 

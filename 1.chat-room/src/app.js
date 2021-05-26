@@ -9,7 +9,7 @@ dotenv.config({ path: path.resolve("../../.env") });
 const usersRouter = require("./routes/usersRoutes");
 const chatroomsRouter = require("./routes/chatroomsRoutes");
 const loginRouter = require("./routes/loginRoutes");
-// const googleAuth = require("./auth/googleAuth");
+const googleAuth = require("./auth/googleAuth");
 
 const app = express();
 
@@ -23,6 +23,6 @@ app.use(express.static(path.resolve(__dirname, '../public')));
 
 app.use("/", loginRouter);
 app.use("/users", usersRouter);
-app.use("/chatrooms", chatroomsRouter);
+app.use("/chatrooms", googleAuth.checkAuthenticated, chatroomsRouter);
 
 module.exports = app;

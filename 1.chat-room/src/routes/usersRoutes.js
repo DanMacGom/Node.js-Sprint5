@@ -1,14 +1,12 @@
 const usersController = require("../controllers/usersController");
 
 const userRouter = require("express").Router();
+const googleAuth = require("../auth/googleAuth");
 
 userRouter.get(
-    "/", 
+    "/",
+    googleAuth.checkAuthenticated, 
     usersController.getAllUsers
-);
-userRouter.delete(
-    "/:userId", 
-    usersController.deleteUser
 );
 
 module.exports = userRouter;
