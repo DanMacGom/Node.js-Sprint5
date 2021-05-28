@@ -10,7 +10,8 @@ chatroomsRouter.get(
 );
 chatroomsRouter.post(
     "/",
-    chatroomsController.createChatroom
+    chatroomsController.createChatroomMiddleware,
+    (req, res) => res.redirect("chatrooms")
 );
 
 chatroomsRouter.get(

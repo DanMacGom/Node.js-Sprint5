@@ -3,8 +3,7 @@ const Chatroom = require("../models/chatroomsModel");
 // CRUD operations.
 
 // Create.
-function createChatroom(req, res) {
-    console.log(req);
+function createChatroomMiddleware(req, res, next) {
     if (!req.body.chatroomName) {
         res.status(400).send({
             message: "Specify a chatroomName."
@@ -14,7 +13,7 @@ function createChatroom(req, res) {
             {
                 chatroomName: req.body.chatroomName,
                 messages: [],
-                createdBy: req.cookies["session-cookie"].username
+                createdBy: req.cookies["session-cookie"]
             },
             async (err, data) => {
                 if (err && err.name === "ValidationError") {
@@ -32,7 +31,7 @@ function createChatroom(req, res) {
                         message: "There was an error with your query."
                     });
                 } else {
-                    res.status(200).send(data);
+                    next();
                 }
             }
         );
@@ -137,7 +136,7 @@ async function deleteChatroom(req, res) {
 }
 
 module.exports = {
-    createChatroom,
+    createChatroomMiddleware,
     getChatroomData,
     getChatroomMiddleware,
     postMessage,
