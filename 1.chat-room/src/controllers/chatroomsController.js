@@ -4,6 +4,7 @@ const Chatroom = require("../models/chatroomsModel");
 
 // Create.
 function createChatroom(req, res) {
+    console.log(req);
     if (!req.body.chatroomName) {
         res.status(400).send({
             message: "Specify a chatroomName."
@@ -62,7 +63,7 @@ function postMessage(chatroomId, username, msg) {
 // Read.
 function getAllChatroomsMiddleware(req, res, next) {
     Chatroom.find(
-        {}, 
+        {},
         { chatroomName: 1, _id: 1 },
         (err, data) => {
             if (err) {

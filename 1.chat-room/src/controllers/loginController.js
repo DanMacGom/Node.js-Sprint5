@@ -20,7 +20,7 @@ function getToken(req, res) {
 
         const userCheck = await User.findOne(
             { googleId: payload["sub"] }
-        ).exec()
+        ).exec();
 
         if (!userCheck) {
             User.create(

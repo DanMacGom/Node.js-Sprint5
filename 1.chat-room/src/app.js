@@ -22,7 +22,7 @@ app.set('views', path.join(__dirname, '../src/views'))
 app.use(express.static(path.resolve(__dirname, '../public')));
 
 app.use("/", loginRouter);
-app.use("/users", usersRouter);
+app.use("/users", googleAuth.checkAuthenticated, usersRouter);
 app.use("/chatrooms", googleAuth.checkAuthenticated, chatroomsRouter);
 
 module.exports = app;

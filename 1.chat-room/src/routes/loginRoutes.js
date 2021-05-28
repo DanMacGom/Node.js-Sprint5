@@ -12,7 +12,8 @@ loginRouter.get(
 );
 loginRouter.post(
     "/",
-    loginController.getToken
+    loginController.getToken,
+    (req, res) => res.redirect("chatrooms")
 );
 
 // Logout
