@@ -2,12 +2,13 @@ function renderLogin(req, res) {
     res.render("login");
 }
 
-function getCookie(req, res) {
+function getCookieMiddleware(req, res, next) {
     res.cookie("session-cookie", req.body.username);
 
-    res.status(200).send({
-        message: `Cookie set.`
-    });
+    next();
+    // res.status(200).send({
+    //     message: `Cookie set.`
+    // });
 }
 
 function logout(req, res) {
@@ -16,7 +17,7 @@ function logout(req, res) {
 }
 
 module.exports = {
-    getCookie,
+    getCookieMiddleware,
     logout,
     renderLogin
 }
