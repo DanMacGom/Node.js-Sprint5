@@ -13,7 +13,7 @@ function createChatroomMiddleware(req, res, next) {
             {
                 chatroomName: req.body.chatroomName,
                 messages: [],
-                createdBy: req.cookies["session-cookie"].username
+                createdBy: req.cookies["session-cookie"]
             },
             async (err, data) => {
                 if (err && err.name === "ValidationError") {
