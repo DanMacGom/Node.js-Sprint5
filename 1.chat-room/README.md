@@ -1,3 +1,6 @@
+# .env
+You need to create a .env and fill it with your environment variables (variable names in .env_example).
+
 # Branches
 Check main branch for solution to Nivell1.<br>
 Check google-auth for solution to Nivell2.
