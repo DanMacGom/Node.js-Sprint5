@@ -6,13 +6,10 @@ function getCookieMiddleware(req, res, next) {
     res.cookie("session-cookie", req.body.username);
 
     next();
-    // res.status(200).send({
-    //     message: `Cookie set.`
-    // });
 }
 
-function logout(req, res) {
-    res.clearCookie("session-token");
+function logout(req, res, next) {
+    res.clearCookie("session-cookie");
     res.redirect("/");
 }
 

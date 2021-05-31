@@ -32,4 +32,10 @@ loginRouter.post(
     (req, res) => res.redirect("chatrooms")
 );
 
+// Logout.
+loginRouter.get(
+    "/logout",
+    loginController.logout
+);
+
 module.exports = loginRouter;
