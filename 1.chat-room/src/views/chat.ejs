@@ -9,6 +9,18 @@
 <body>
     <ul id="messages"></ul>
 
+    <form action="/chatrooms" method="GET">
+        <button type="submit" class="btn-link">
+            Back
+        </button>
+    </form>
+
+    <form action="/logout" method="GET">
+        <button type="submit" class="btn-link">
+            Logout
+        </button>
+    </form>
+
     <form id="form">
         <input id="input" autocomplete="off" />
         <button>Send</button>
@@ -45,36 +57,6 @@
                 window.scrollTo(0, document.body.scrollHeight);
             }
         );
-
-        // socket.on(
-        //     "connect",
-        //     () => {
-        //         let item = document.createElement('li');
-        //         item.textContent = ``;
-        //         messages.appendChild(item);
-        //         window.scrollTo(0, document.body.scrollHeight);
-        //     }
-        // );
-
-        // socket.on(
-        //     "onConnect",
-        //     (msg) => {
-        //         let item = document.createElement('li');
-        //         item.textContext = msg;
-        //         messages.appendChild(item);
-        //         window.scrollTo(0, document.body.scrollHeight);
-        //     }
-        // );
-
-        // socket.on(
-        //     "onDisconnect",
-        //     (msg) => {
-        //         let item = document.createElement('li');
-        //         item.textContent = msg;
-        //         messages.appendChild(item);
-        //         window.scrollTo(0, document.body.scrollHeight);                
-        //     }
-        // );
 
     </script>
 </body>
