@@ -1,3 +1,8 @@
+# Usage
+Navigate to root folder.<br>
+`npm install`<br>
+`npm start`<br>
+
 # .env
 You need to create a .env and fill it with your environment variables (variable names in .env_example).
 
